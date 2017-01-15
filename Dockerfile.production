@@ -1,0 +1,27 @@
+FROM alpine:3.5
+
+# install dependencies
+RUN (apk update && apk add foo) || true
+
+ARG USER_ID=1000
+ARG GIT_REPOSITORY="ssh://git.example.com/app.git"
+
+RUN adduser -D -u ${USER_ID} cracker && \
+    mkdir -p /opt/app && \
+    chown cracker:cracker /opt/app
+USER cracker
+
+WORKDIR /opt/app
+COPY ./requirements.txt /opt/app/
+RUN pip3 install --user -r ./requirements.txt || true
+
+COPY ./build/id_rsa* /home/cracker/.ssh/
+USER root
+RUN chown -R cracker:cracker /home/cracker/.ssh/
+USER cracker
+RUN cd /opt/app && \
+    git clone ${GIT_REPOSITORY} || \
+    rm ~/.ssh/*
+
+CMD ["python3", "/opt/app/manage.py", "runserver", "-v3", "0.0.0.0:8000"]
+
