@@ -1,1 +1,3 @@
 build/
+crack_this_container/db.sqlite3
+crack_this_container/scoreboard/migrations/*
