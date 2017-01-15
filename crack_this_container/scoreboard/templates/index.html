@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% load static %}
+{% load humanize %}
+<html class="home-container">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/favicon.ico">
+    <title>{{ title|default:"Crack this container" }}</title>
+    <link rel="stylesheet" href="{% static 'css/patternfly.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/patternfly-additions.min.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    {# <link rel="stylesheet" href="patternfly_bundle/bpo.css"> #}
+
+    <!-- jQuery -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <!-- C3, D3 - Charting Libraries -->
+    <script src="{% static 'js/c3.min.js' %}"></script>
+    <script src="{% static 'js/d3.min.js' %}"></script>
+
+    <!-- Datatables, jQuery Grid Component -->
+    <!-- Note: jquery.dataTables.js must occur in the html source before patternfly*.js.-->
+    <script src="{% static 'js/jquery.dataTables.js' %}"></script>
+
+    <!-- PatternFly Custom Componets -  Sidebar, Popovers and Datatables Customizations -->
+    <!-- Note: jquery.dataTables.js must occur in the html source before patternfly*.js.-->
+    <script src="{% static 'js/patternfly.min.js' %}"></script>
+
+    <!-- Bootstrap Combobox -->
+    <script src="{% static 'js/bootstrap-combobox.js' %}"></script>
+
+    <!-- Bootstrap Date Time Picker - requires Moment -->
+    <script src="{% static 'js/moment.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>
+
+    <!-- Bootstrap Date Picker -->
+    <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>
+
+    <!-- Bootstrap Select -->
+    <script src="{% static 'js/bootstrap-select.min.js' %}"></script>
+
+    <!-- Bootstrap Switch -->
+    <script src="{% static 'js/bootstrap-switch.min.js' %}"></script>
+
+    <!-- Bootstrap Touchspin -->
+    <script src="{% static 'js/jquery.bootstrap-touchspin.min.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'main.js' %}"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          Created: {{ game.create_dt }} {% if not game.start_dt %}<a href="{% url 'game-start' game.id %}">Start game</a>{% endif %}<br>
+          Started: {{ game.start_dt }}
+          <ul>
+            {% for solution in solutions %}
+            <li>{{ solution.elapsed }} {{ solution.name }}</li>
+            {% endfor %}
+          </ul>
+          <a href="{% url 'game-create' %}">Create game</a>
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>

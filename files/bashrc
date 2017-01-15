@@ -11,8 +11,8 @@ if [ -f /etc/bashrc ]; then
         . /etc/bashrc
 fi
 
-RESPONSE = $(curl -XPOST -L --data="{}" http://web:8000/api/v0/solutions)
+RESPONSE=$(curl -s -L -XPOST -L --data "{}" http://web:8000/api/v0/solutions/)
 
-printf "${RESPONSE}"
+printf "\n${RESPONSE}\n\n"
 
-# exit
+exit
