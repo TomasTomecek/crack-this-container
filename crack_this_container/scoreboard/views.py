@@ -4,6 +4,9 @@ from django.shortcuts import render
 from django.http.response import HttpResponse
 from django.shortcuts import redirect
 
+from ws4redis.publisher import RedisPublisher
+from ws4redis.redis_store import RedisMessage
+
 
 def index(request):
     game = Game.objects.latest_game()
@@ -29,4 +32,12 @@ def create_game(request):
 def api_submit_solution(request):
     game = Game.objects.latest_game()
     solution = Solution.create(game)
+
+    redis_publisher = RedisPublisher(facility='solution-submitted', broadcast=True)
+    message = RedisMessage(solution.name)
+    print(message)
+    redis_publisher.publish_message(message)
+
+    print(solution.message)
+
     return HttpResponse(solution.message)

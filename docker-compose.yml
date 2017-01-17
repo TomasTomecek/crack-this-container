@@ -5,19 +5,23 @@ services:
     ports:
      - "8000:8000"
     volumes:
-     - ./crack_this_container/:/opt/app/:Z
+     - ./crack_this_container/:/opt/app/crack_this_container:Z
     stdin_open: true
     tty: true
   migrator:
     build: .
     volumes:
-     - ./crack_this_container/:/opt/app/:Z
+     - ./crack_this_container/:/opt/app/crack_this_container:Z
     links:
      - web
-    command: bash -c "python3 /opt/app/manage.py makemigrations && exec python3 /opt/app/manage.py migrate --no-input"
+    command: bash -c "python3 ./manage.py collectstatic -v 2 --noinput && python3 ./manage.py makemigrations && exec python3 ./manage.py migrate --no-input"
   ssh:
     build:
       context: .
       dockerfile: ./Dockerfile.sshd
+    links:
+     - web
+  redis:
+    image: redis
     links:
      - web

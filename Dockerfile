@@ -12,14 +12,14 @@ WORKDIR /opt/app
 COPY ./requirements.txt /opt/app/
 RUN pip3 install --user -r ./requirements.txt
 
-# COPY ./install_static_data.sh /opt/app
-# COPY ./bower.json /opt/app
-# RUN ./install_static_data.sh
+COPY ./bower.json /opt/app
+RUN bower install
 
 # the actual sources will be replaced by bind mount in development
-COPY ./crack_this_container /opt/app/
+COPY ./crack_this_container /opt/app/crack_this_container/
+WORKDIR /opt/app/crack_this_container
 USER root
 RUN chown -R cracker:cracker .
 USER cracker
 
-CMD ["python3", "/opt/app/manage.py", "runserver", "-v3", "0.0.0.0:8000"]
+CMD ["python3", "./manage.py", "runserver", "-v3", "0.0.0.0:8000"]

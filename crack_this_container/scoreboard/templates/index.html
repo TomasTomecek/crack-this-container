@@ -20,39 +20,15 @@
     <!-- Bootstrap JS -->
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
-    <!-- C3, D3 - Charting Libraries -->
-    <script src="{% static 'js/c3.min.js' %}"></script>
-    <script src="{% static 'js/d3.min.js' %}"></script>
-
-    <!-- Datatables, jQuery Grid Component -->
-    <!-- Note: jquery.dataTables.js must occur in the html source before patternfly*.js.-->
-    <script src="{% static 'js/jquery.dataTables.js' %}"></script>
-
     <!-- PatternFly Custom Componets -  Sidebar, Popovers and Datatables Customizations -->
     <!-- Note: jquery.dataTables.js must occur in the html source before patternfly*.js.-->
     <script src="{% static 'js/patternfly.min.js' %}"></script>
 
-    <!-- Bootstrap Combobox -->
-    <script src="{% static 'js/bootstrap-combobox.js' %}"></script>
-
     <!-- Bootstrap Date Time Picker - requires Moment -->
     <script src="{% static 'js/moment.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>
 
-    <!-- Bootstrap Date Picker -->
-    <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
-    <script src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>
-
-    <!-- Bootstrap Select -->
-    <script src="{% static 'js/bootstrap-select.min.js' %}"></script>
-
-    <!-- Bootstrap Switch -->
-    <script src="{% static 'js/bootstrap-switch.min.js' %}"></script>
-
-    <!-- Bootstrap Touchspin -->
-    <script src="{% static 'js/jquery.bootstrap-touchspin.min.js' %}"></script>
-
-    <script type="text/javascript" src="{% static 'main.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/ws4redis.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
   </head>
 
   <body>
@@ -61,7 +37,7 @@
         <div class="col-sm-12">
           Created: {{ game.create_dt }} {% if not game.start_dt %}<a href="{% url 'game-start' game.id %}">Start game</a>{% endif %}<br>
           Started: {{ game.start_dt }}
-          <ul>
+          <ul id="winners">
             {% for solution in solutions %}
             <li>{{ solution.elapsed }} {{ solution.name }}</li>
             {% endfor %}

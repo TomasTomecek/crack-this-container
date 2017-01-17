@@ -1,0 +1,8 @@
+{
+  "name": "crack-this-container",
+  "version": "0.0.1",
+  "dependencies": {
+    "patternfly": "~3.12.0"
+  },
+  "private": true
+}
