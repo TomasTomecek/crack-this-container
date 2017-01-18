@@ -11,7 +11,6 @@ from ws4redis.redis_store import RedisMessage
 def index(request):
     game = Game.objects.latest_game()
     solutions = game.ordered_solutions
-    print(solutions)
     return render(request, "index.html", {
         "game": game,
         "solutions": solutions,

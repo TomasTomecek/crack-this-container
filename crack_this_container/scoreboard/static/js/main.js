@@ -45,13 +45,23 @@ $(function() {
 
     // stopwatch
     var stopwatch;
+
+    function start_stopwatch() {
+    }
+
     function tick() {
-      stopwatch++;
-      var t=moment().hour(0).minute(0).second(stopwatch).format('mm : ss');
+      stopwatch.add(1, "second");
+      var t=stopwatch.format('mm : ss');
       $("#timer").html(t);
       t = setTimeout(function () {
         tick();
       }, 1000);
+    }
+
+    var timer_div=$("#timer");
+    if (timer_div.length > 0) {
+      stopwatch=moment(timer_div.html(), ["mm : ss"]);
+      tick();
     }
 
     $("#game-control button").click(function() {
@@ -59,9 +69,11 @@ $(function() {
         "/api/v0/game/latest/start/",
         {},
         function(data) {
-          $("#game-control").html("<div id=\"timer\"></div>");
-          stopwatch=-1;
-          tick();
+          if (stopwatch === undefined) {
+            $("#game-control").html("<div id=\"timer\"></div>");
+            stopwatch="00 : 00";
+            tick();
+          }
         },
         'json'
       );

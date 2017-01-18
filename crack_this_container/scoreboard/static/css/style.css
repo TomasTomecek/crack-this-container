@@ -19,8 +19,13 @@ ul#winners {
   float: right;
 }
 
+#game-description {
+  text-align: center;
+  font-size: 24px;
+}
+
 #game-control {
   text-align: center;
   margin: 30px 0 30px 0;
-  font-size: 32px;
+  font-size: 36px;
 }

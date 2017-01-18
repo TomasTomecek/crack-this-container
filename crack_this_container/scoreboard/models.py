@@ -51,6 +51,17 @@ class Game(models.Model):
     def solutions_count(self):
         return self.solutions.count()
 
+    @property
+    def has_started(self):
+        return self.start_dt is not None
+
+    @property
+    def timer(self):
+        diff = datetime.datetime.now() - self.start_dt
+        minutes = diff.total_seconds() // 60
+        seconds = int(diff.total_seconds() % 60)
+        return "%02d : %02d" % (minutes, seconds)
+
     def submit_solution(self):
         if self.solutions_count >= len(self.codenames):
             return "", self.too_late
