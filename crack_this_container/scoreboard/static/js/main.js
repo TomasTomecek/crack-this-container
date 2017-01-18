@@ -50,9 +50,9 @@ $(function() {
     }
 
     function tick() {
-      stopwatch.add(1, "second");
       var t=stopwatch.format('mm : ss');
       $("#timer").html(t);
+      stopwatch.add(1, "second");
       t = setTimeout(function () {
         tick();
       }, 1000);
@@ -71,7 +71,7 @@ $(function() {
         function(data) {
           if (stopwatch === undefined) {
             $("#game-control").html("<div id=\"timer\"></div>");
-            stopwatch="00 : 00";
+            stopwatch=moment("00 : 00", ["mm : ss"]);
             tick();
           }
         },
