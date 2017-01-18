@@ -34,6 +34,8 @@ WS4REDIS_CONNECTION = {
     'port': 6379,
 }
 
+WS4REDIS_EXPIRE = 5
+
 # Application definition
 
 INSTALLED_APPS = [

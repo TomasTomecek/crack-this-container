@@ -1,4 +1,4 @@
-jQuery(document).ready(function($) {
+$(function() {
     var ws4redis = WS4Redis({
         uri: url('solution-submitted'),
         connecting: on_connecting,
@@ -29,6 +29,36 @@ jQuery(document).ready(function($) {
 
     // receive a message though the websocket from the server
     function receiveMessage(msg) {
-        $("#winners").append('<li>' + msg + '</li>');
+        console.log(msg);
+        var displayed_entries=$("#winners li button").text();
+        if (displayed_entries.indexOf(msg) === -1) {
+          var b=$("#hidden-winner-button").clone();
+          var h=b.html().replace("TEXT", msg);
+          $("ul#winners").append("<li>" + h + "</li>");
+        }
     }
+
+    // stopwatch
+    var stopwatch;
+    function tick() {
+      stopwatch++;
+      var t=moment().hour(0).minute(0).second(stopwatch).format('mm : ss');
+      $("#timer").html(t);
+      t = setTimeout(function () {
+        tick();
+      }, 1000);
+    }
+
+    $("#game-control button").click(function() {
+      $.post(
+        "/api/v0/game/latest/start/",
+        {},
+        function(data) {
+          $("#game-control").html("<div id=\"timer\"></div>");
+          stopwatch=-1;
+          tick();
+        },
+        'json'
+      );
+    });
 });

@@ -10,7 +10,7 @@
     <title>{{ title|default:"Crack this container" }}</title>
     <link rel="stylesheet" href="{% static 'css/patternfly.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/patternfly-additions.min.css' %}">
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
     {# <link rel="stylesheet" href="patternfly_bundle/bpo.css"> #}
 
@@ -24,7 +24,6 @@
     <!-- Note: jquery.dataTables.js must occur in the html source before patternfly*.js.-->
     <script src="{% static 'js/patternfly.min.js' %}"></script>
 
-    <!-- Bootstrap Date Time Picker - requires Moment -->
     <script src="{% static 'js/moment.min.js' %}"></script>
 
     <script type="text/javascript" src="{% static 'js/ws4redis.js' %}"></script>
@@ -32,14 +31,25 @@
   </head>
 
   <body>
+    <div class="hidden">
+      <div id="hidden-winner-button">
+        <button class="btn btn-default btn-lg " type="button">TEXT</button>
+      </div>
+    </div>
     <div class="container">
       <div class="row">
-        <div class="col-sm-12">
-          Created: {{ game.create_dt }} {% if not game.start_dt %}<a href="{% url 'game-start' game.id %}">Start game</a>{% endif %}<br>
-          Started: {{ game.start_dt }}
+        <div class="span4">
+          <div id="game-control" class="center-block">
+            <!--
+            # TODO: display timer when the game already started
+            # TODO: activate via web socket
+            # TODO: add description
+            -->
+            <button class="btn btn-primary btn-lg">Start game</button>
+          </div>
           <ul id="winners">
             {% for solution in solutions %}
-            <li>{{ solution.elapsed }} {{ solution.name }}</li>
+            <li><button class="btn btn-default btn-lg " type="button">{{ solution.listing_text }}</button></li>
             {% endfor %}
           </ul>
           <a href="{% url 'game-create' %}">Create game</a>

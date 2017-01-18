@@ -25,5 +25,5 @@ urlpatterns = [
     url(r'^game/(?P<game_id>[0-9]+)/$', views.start_game, name='game-start'),
     url(r'^game/create/$', views.create_game, name='game-create'),
     url(r'^api/v0/solutions/$', views.api_submit_solution, name='api-submit-solution'),
-
+    url(r'^api/v0/game/latest/start/$', views.api_start_latest_game, name='api-game-start'),
 ]

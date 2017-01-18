@@ -85,4 +85,8 @@ class Solution(models.Model):
 
     @property
     def elapsed(self):
-        return (self.submitted_dt - self.game.start_dt).total_seconds()
+        return "%.1f s" % (self.submitted_dt - self.game.start_dt).total_seconds()
+
+    @property
+    def listing_text(self):
+        return "%s (%s)" % (self.name, self.elapsed)
