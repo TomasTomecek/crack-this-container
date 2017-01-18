@@ -22,6 +22,13 @@ ul#winners {
 #game-description {
   text-align: center;
   font-size: 24px;
+  margin: 0 0 30px 0;
+}
+
+h1 {
+  text-align: center;
+  font-size: 48px;
+  margin: 0 0 24px 0;
 }
 
 #game-control {
