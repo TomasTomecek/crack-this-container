@@ -64,7 +64,7 @@ class Game(models.Model):
 
     def submit_solution(self):
         if self.solutions_count >= len(self.codenames):
-            return "", self.too_late
+            return "TOO_LATE", self.too_late
         else:
             c = self.codenames[self.solutions_count]
             return c, self.message_templates[self.solutions_count] % c
@@ -100,6 +100,4 @@ class Solution(models.Model):
 
     @property
     def listing_text(self):
-        if self.game.solutions_count >= 3:
-            return "TOO_LATE"
-        return "%s (%s)" % (self.name, self.elapsed)
+        return "Mr. %s in %s." % (self.name, self.elapsed)

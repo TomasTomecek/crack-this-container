@@ -13,7 +13,8 @@ def index(request):
     solutions = game.ordered_solutions
     return render(request, "index.html", {
         "game": game,
-        "solutions": solutions,
+        "solutions": solutions[:3],
+        "solutions_count": game.solutions_count,
     })
 
 
