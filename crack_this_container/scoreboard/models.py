@@ -89,4 +89,6 @@ class Solution(models.Model):
 
     @property
     def listing_text(self):
+        if self.game.solutions_count >= 3:
+            return "TOO_LATE"
         return "%s (%s)" % (self.name, self.elapsed)

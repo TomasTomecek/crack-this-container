@@ -41,9 +41,6 @@ def api_submit_solution(request):
 
     redis_publisher = RedisPublisher(facility='solution-submitted', broadcast=True)
     message = RedisMessage(solution.listing_text)
-    print(message)
     redis_publisher.publish_message(message)
-
-    print(solution.message)
 
     return HttpResponse(solution.message)

@@ -52,7 +52,10 @@
             <li><button class="btn btn-default btn-lg " type="button">{{ solution.listing_text }}</button></li>
             {% endfor %}
           </ul>
-          <a href="{% url 'game-create' %}">Create game</a>
+          <div>
+            <a href="{% url 'game-create' %}">Create game</a>
+            <span id="solved-box"><span id="solved-count">{{ solutions.count }}</span> solvers</span>
+          </div>
         </div>
       </div>
     </div>

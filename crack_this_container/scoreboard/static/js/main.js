@@ -30,12 +30,17 @@ $(function() {
     // receive a message though the websocket from the server
     function receiveMessage(msg) {
         console.log(msg);
-        var displayed_entries=$("#winners li button").text();
-        if (displayed_entries.indexOf(msg) === -1) {
-          var b=$("#hidden-winner-button").clone();
-          var h=b.html().replace("TEXT", msg);
-          $("ul#winners").append("<li>" + h + "</li>");
+        if (msg !== "TOO_LATE") {
+          var displayed_entries=$("#winners li button").text();
+          if (displayed_entries.indexOf(msg) === -1) {
+            var b=$("#hidden-winner-button").clone();
+            var h=b.html().replace("TEXT", msg);
+            $("ul#winners").append("<li>" + h + "</li>");
+          }
         }
+        $('#solved-count').html(function(i, oldval) {
+          return ++oldval;
+        });
     }
 
     // stopwatch

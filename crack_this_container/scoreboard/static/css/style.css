@@ -15,6 +15,10 @@ ul#winners {
   width: 640px;
 }
 
+#solved-box {
+  float: right;
+}
+
 #game-control {
   text-align: center;
   margin: 30px 0 30px 0;
