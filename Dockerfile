@@ -19,6 +19,7 @@ RUN bower install
 COPY ./crack_this_container /opt/app/crack_this_container/
 WORKDIR /opt/app/crack_this_container
 USER root
+RUN dnf install -y python3-psycopg2
 RUN chown -R cracker:cracker .
 USER cracker
 

@@ -88,8 +88,13 @@ WSGI_APPLICATION = 'ws4redis.django_runserver.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ["POSTGRESQL_DATABASE"],
+        'USER': os.environ["POSTGRESQL_USER"],
+        'PASSWORD': os.environ["POSTGRESQL_PASSWORD"],
+        'HOST': "db"
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
