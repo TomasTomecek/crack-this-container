@@ -22,9 +22,8 @@ Build with
 $ docker build -t ssh .
 ```
 
+Set password
 
-## TODO
-
- * journal container
-  * -v /v/l/journal
-  * -v /e/machine-id
+```
+$ docker exec -ti crackthiscontainer_web_1 python3 ./manage.py createsuperuser
+```

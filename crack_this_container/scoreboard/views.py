@@ -3,11 +3,13 @@ from .models import Game, Solution
 from django.shortcuts import render
 from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 
 from ws4redis.publisher import RedisPublisher
 from ws4redis.redis_store import RedisMessage
 
 
+@login_required
 def index(request):
     game = Game.objects.latest_game()
     solutions = game.ordered_solutions
