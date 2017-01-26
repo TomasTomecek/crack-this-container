@@ -40,6 +40,8 @@ def api_start_latest_game(request):
 def api_submit_solution(request):
     game = Game.objects.latest_game()
     solution = Solution.create(game)
+    if not game.has_started:
+        return HttpResponse("Game hasn't started yet. You can't be that quick.")
 
     redis_publisher = RedisPublisher(facility='solution-submitted', broadcast=True)
     message = RedisMessage(solution.listing_text)
