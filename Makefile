@@ -22,3 +22,6 @@ build/id_rsa.pub build/id_rsa: build/
 
 build/:
 	mkdir -p $(build_dir)
+
+wrong-image:
+	docker build -f ./Dockerfile.game --tag=tomastomecek/devconf2017-game .

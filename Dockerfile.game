@@ -4,7 +4,7 @@ FROM alpine:3.5
 RUN (apk update && apk add foo) || true
 
 ARG USER_ID=1000
-ARG GIT_REPOSITORY="ssh://git.example.com/app.git"
+ARG GIT_REPOSITORY="ssh://ec2-35-157-101-30.eu-central-1.compute.amazonaws.com/app.git"
 
 RUN adduser -D -u ${USER_ID} cracker && \
     mkdir -p /opt/app && \
