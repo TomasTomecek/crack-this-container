@@ -11,11 +11,19 @@ from ws4redis.redis_store import RedisMessage
 
 @login_required
 def index(request):
+    def get_or_nothing(li, index):
+        try:
+            return li[index].listing_text
+        except IndexError:
+            return ""
+
     game = Game.objects.latest_game()
     solutions = game.ordered_solutions
     return render(request, "index.html", {
         "game": game,
-        "solutions": solutions[:3],
+        "first_solution": get_or_nothing(solutions, 0),
+        "second_solution": get_or_nothing(solutions, 1),
+        "third_solution": get_or_nothing(solutions, 2),
         "solutions_count": game.solutions_count,
     })
 

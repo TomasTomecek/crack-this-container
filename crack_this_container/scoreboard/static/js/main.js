@@ -32,10 +32,19 @@ $(function() {
         console.log(msg);
         if (msg !== "TOO_LATE") {
           var displayed_entries=$("#winners li button").text();
+          var displayed_entries_count=$("#winners li button").length;
+          var mapping = {
+            0: "first",
+            1: "second",
+            2: "third"
+          }
           if (displayed_entries.indexOf(msg) === -1) {
             var b=$("#hidden-winner-button").clone();
             var h=b.html().replace("TEXT", msg);
-            $("ul#winners").append("<li>" + h + "</li>");
+
+            var css_selector = "ol#winners li#" + mapping[displayed_entries_count] + "-solution";
+
+            $(css_selector).html(h);
           }
         }
         $('#solved-count').html(function(i, oldval) {

@@ -52,11 +52,17 @@
             tomastomecek/devconf2017-game
           </div>
           <h1>Winners</h1>
-          <ul id="winners">
-            {% for solution in solutions %}
-            <li><button class="btn btn-default btn-lg " type="button">{{ solution.listing_text }}</button></li>
-            {% endfor %}
-          </ul>
+          <ol id="winners">
+            <li id="first-solution">
+              {% if first_solution %}<button class="btn btn-default btn-lg " type="button">{{ first_solution }}</button>{% endif %}
+            </li>
+            <li id="second-solution">
+              {% if second_solution %}<button class="btn btn-default btn-lg " type="button">{{ second_solution }}</button>{% endif %}
+            </li>
+            <li id="third-solution">
+              {% if third_solution %}<button class="btn btn-default btn-lg " type="button">{{ third_solution }}</button>{% endif %}
+            </li>
+          </ol>
           <div>
             <a href="{% url 'game-create' %}">Create game</a>
             <span id="solved-box"><span id="solved-count">{{ solutions_count }}</span> solvers</span>

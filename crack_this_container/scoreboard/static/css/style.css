@@ -1,13 +1,25 @@
-ul#winners li button {
+#winners li button {
   width: 100%;
 }
 
-ul#winners li {
+#winners li {
   padding: 0 0 20px 0;
 }
 
-ul#winners {
-  list-style-type: none;
+#first-solution {
+  font-size: 32px;
+}
+
+#second-solution {
+  font-size: 24px;
+}
+
+#third-solution {
+  font-size: 18px;
+}
+
+#winners {
+  /* list-style-type: none; */
   padding: 0;
 }
 
