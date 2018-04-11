@@ -1,10 +1,10 @@
-FROM alpine:3.5
+FROM alpine:3.7
 
 # install dependencies
 RUN (apk update && apk add foo) || true
 
 ARG USER_ID=1000
-ARG GIT_REPOSITORY="ssh://ec2-35-157-101-30.eu-central-1.compute.amazonaws.com/app.git"
+ARG GIT_REPOSITORY="ssh://ssh/app.git"
 
 RUN adduser -D -u ${USER_ID} cracker && \
     mkdir -p /opt/app && \
@@ -24,4 +24,3 @@ RUN cd /opt/app && \
     rm ~/.ssh/*
 
 CMD ["python3", "/opt/app/manage.py", "runserver", "-v3", "0.0.0.0:8000"]
-
