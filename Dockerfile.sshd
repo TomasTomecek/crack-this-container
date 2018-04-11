@@ -1,4 +1,4 @@
-FROM fedora:25
+FROM registry.fedoraproject.org/fedora:28
 RUN dnf install -y openssh-server
 RUN ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa && \
     ssh-keygen -f /etc/ssh/ssh_host_dsa_key -N '' -t dsa
