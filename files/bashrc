@@ -11,6 +11,7 @@ if [ -f /etc/bashrc ]; then
         . /etc/bashrc
 fi
 
+# TODO: authentication, use fingerprint of the key or some secret
 RESPONSE=$(curl -s -L -XPOST -L --data "{}" http://web:8000/api/v0/solutions/)
 
 printf "\n${RESPONSE}\n\n"
