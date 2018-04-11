@@ -12,8 +12,8 @@ WORKDIR /opt/app
 COPY ./requirements.txt /opt/app/
 RUN pip3 install --user -r ./requirements.txt
 
-COPY ./bower.json /opt/app
-RUN bower install
+COPY ./package.json /opt/app
+RUN npm install
 
 # the actual sources will be replaced by bind mount in development
 COPY ./crack_this_container /opt/app/crack_this_container/
