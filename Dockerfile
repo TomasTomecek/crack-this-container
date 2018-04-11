@@ -1,6 +1,5 @@
-FROM fedora:25
-RUN dnf install -y git python3-pip npm && \
-    npm install -g bower
+FROM registry.fedoraproject.org/fedora:28
+RUN dnf install -y git python3-pip npm python3-psycopg2
 
 ARG USER_ID=1000
 RUN useradd -o -u ${USER_ID} cracker && \
@@ -19,8 +18,7 @@ RUN npm install
 COPY ./crack_this_container /opt/app/crack_this_container/
 WORKDIR /opt/app/crack_this_container
 USER root
-RUN dnf install -y python3-psycopg2
-RUN chown -R cracker:cracker .
+RUN chown -R cracker:cracker /opt/app/
 USER cracker
 
 CMD ["python3", "./manage.py", "runserver", "-v3", "0.0.0.0:8000"]
