@@ -2,6 +2,9 @@
 mkfile_path := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 build_dir := "$(mkfile_path)build/"
 
+GAME_IMAGE := docker.io/tomastomecek/open-house-2018-game
+
+
 default: all
 
 build: build/id_rsa.pub
@@ -14,7 +17,7 @@ all: build run
 # build and run, this is the default; we don't want to build every time we run
 
 clean:
-	rm $(build_dir)id_rsa{,.pub}
+	rm -f $(build_dir)id_rsa{,.pub}
 	rmdir $(build_dir)
 
 build/id_rsa.pub build/id_rsa: build/
@@ -23,5 +26,9 @@ build/id_rsa.pub build/id_rsa: build/
 build/:
 	mkdir -p $(build_dir)
 
-wrong-image:
-	docker build -f ./Dockerfile.game --tag=tomastomecek/devconf2017-game .
+build-game-image:
+	docker build -f ./Dockerfile.game --tag=$(GAME_IMAGE) .
+
+push-game-image: build-game-image
+	docker push $(GAME_IMAGE)
+

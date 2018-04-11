@@ -1,11 +1,11 @@
-version: "2"
+version: "3.1"
 services:
   web:
     build: .
     ports:
      - "8000:8000"
-    # volumes:
-    #  - ./crack_this_container/:/opt/app/crack_this_container:Z
+    volumes:
+     - ./crack_this_container/:/opt/app/crack_this_container:Z
     links:
      - db
     stdin_open: true
@@ -16,8 +16,8 @@ services:
       - POSTGRESQL_PASSWORD=p4$$word
   migrator:
     build: .
-    # volumes:
-    #  - ./crack_this_container/:/opt/app/crack_this_container:Z
+    volumes:
+     - ./crack_this_container/:/opt/app/crack_this_container:Z
     links:
      - web
      - db
@@ -32,19 +32,20 @@ services:
       dockerfile: ./Dockerfile.sshd
     links:
      - web
+    ports:
+     - "22:22"
   redis:
     image: redis
     links:
      - web
   db:
-    image: praiskup/postgresql:APIv1.0.1-fedora23
+    image: registry.access.redhat.com/rhscl/postgresql-96-rhel7
     volumes:
       - pgsql-data:/var/lib/pgsql/data
     environment:
-      - CONT_DEBUG=3
       - POSTGRESQL_DATABASE=the_project
       - POSTGRESQL_USER=the_user
       - POSTGRESQL_PASSWORD=p4$$word
-      - POSTGRESQL_CONTAINER_OPTS=clear_pgdata_pidfile = true ; assert_external_data = false
+      # - POSTGRESQL_CONTAINER_OPTS=clear_pgdata_pidfile = true ; assert_external_data = false
 volumes:
   pgsql-data: {}
